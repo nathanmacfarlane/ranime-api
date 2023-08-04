@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const { getQuote } = require("./quotes/quotes");
+const { getShows } = require("./quotes/shows");
 
 dotenv.config();
 
@@ -9,7 +10,8 @@ const port = 3000;
 
 app.get("/", (req, res) => {
   const quote = getQuote();
-  res.send({ quote });
+  const options = getShows({ exclude: [quote.show] });
+  res.send({ quote, options });
 });
 
 app.listen(port, () => {
