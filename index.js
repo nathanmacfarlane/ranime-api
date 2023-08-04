@@ -11,7 +11,7 @@ const port = 3000;
 app.get("/", (req, res) => {
   const quote = getQuote();
   const options = getShows({ exclude: [quote.show] });
-  res.send({ quote, options });
+  res.send({ quote, options: [...options, quote.anime] });
 });
 
 app.listen(port, () => {
